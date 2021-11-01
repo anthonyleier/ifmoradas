@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block conteudo %}
-<div class="container-fluid">
+<div class="container">
 	<div class="row row-cols-1 row-cols-md-3 g-4">
 		{% for imovel in moradias %}
 		<div class="col" onclick="location.href='/detalhes/{{imovel.id}}';">
