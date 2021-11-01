@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% block conteudo %}
 <div class="container-fluid">
 	<div class="row row-cols-1 row-cols-md-3 g-4">
-		{% for imovel in imoveis %}
+		{% for imovel in moradias %}
 		<div class="col">
 			<div class="card">
 				<img src="{{imovel.imagem}}" class="card-img-top" alt="{{imovel.imagem}}" />
 				<div class="card-body">
-					<h5 class="card-title">{{imovel.titulo}}</h5>
-					<p class="card-text">{{imovel.descricao}}</p>
+					<h5 class="card-title">{{imovel.nome}}</h5>
+					<p class="card-text">{{imovel.descricao}}{{imovel.valor}}</p>
 				</div>
 			</div>
 		</div>
