@@ -8,7 +8,7 @@
 </div>
 
 <div class="col-8 m-auto pt-2>s pb-2 text-center">
-	<form name="form" id="form" action="{% if form %} /update/{{moradias.id}}/ {% else %} /create/ {%endif%}" method="post">
+	<form name="form" id="form" action="{% if moradias %} /update/{{moradias.id}}/ {% else %} /create/ {%endif%}" method="post">
 		{% csrf_token %}
 		<div class="form-group mt-4">{{form.nome}}</div>
 		<div class="form-group mt-4">{{form.descricao}}</div>

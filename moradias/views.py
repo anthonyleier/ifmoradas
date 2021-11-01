@@ -8,7 +8,7 @@ def home(request):
 
     search = request.GET.get('search')
     if search:
-        data['moradias'] = Moradia.objects.filter(modelo__icontains=search)
+        data['moradias'] = Moradia.objects.filter(nome__icontains=search)
     else:
         data['moradias'] = Moradia.objects.all()
 

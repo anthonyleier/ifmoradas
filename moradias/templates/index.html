@@ -2,9 +2,9 @@
 <div class="container-fluid">
 	<div class="row row-cols-1 row-cols-md-3 g-4">
 		{% for imovel in moradias %}
-		<div class="col">
+		<div class="col" onclick="location.href='/detalhes/{{imovel.id}}';">
 			<div class="card">
-				<img src="{{imovel.imagem}}" class="card-img-top" alt="{{imovel.imagem}}" />
+				<img src="{{imovel.imagem1}}" class="card-img-top" alt="{{imovel.imagem1}}" />
 				<div class="card-body">
 					<h5 class="card-title">{{imovel.nome}}</h5>
 					<p class="card-text">{{imovel.descricao}}{{imovel.valor}}</p>
