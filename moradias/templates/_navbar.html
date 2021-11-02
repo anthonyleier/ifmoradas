@@ -15,22 +15,17 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item active">
+					<a class="nav-link" href="/novo">Novo</a>
+				</li>
+			</ul>
 			<form class="d-flex" method="GET">
 				<input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar" />
 				<button class="btn btn-success" type="submit"><img src="{% static 'img/search.svg' %}" width="20px" /></button>
 			</form>
 			<div class="nav-item">
-				<div class="dropdown">
-					<a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="{% static 'img/user.svg' %}" width="20px" />
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="#">Action</a></li>
-						<li><a class="dropdown-item" href="#">Another action</a></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
-					</ul>
-				</div>
+				<img src="{% static 'img/user.svg' %}" width="20px" />
 			</div>
 		</div>
 	</div>
