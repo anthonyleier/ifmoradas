@@ -1,32 +1,60 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="{% url 'home' %}">IFMoradas</a>
+<div id="navbar" class="col-md-12 bg-dark">
+	<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">IFMoradas</a>
 		<button
 			class="navbar-toggler"
 			type="button"
-			data-bs-toggle="collapse"
-			data-bs-target="#navbarSupportedContent"
+			data-toggle="collapse"
+			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent"
 			aria-expanded="false"
 			aria-label="Toggle navigation"
 		>
 			<span class="navbar-toggler-icon"></span>
 		</button>
+
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item active">
-					<a class="nav-link" href="/novo">Novo</a>
-				</li>
-			</ul>
-			<form class="d-flex" method="GET">
-				<input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar" />
-				<button class="btn btn-success" type="submit"><img src="{% static 'img/search.svg' %}" width="20px" /></button>
+			<form class="form-inline ml-5 pr-5" action="GET">
+				<input
+					id="inputpesquisa"
+					class="form-control pr-5"
+					type="search"
+					placeholder="O que você quer?"
+					aria-label="Search"
+					name="search"
+				/>
+				<button id="botao_verde" class="btn btn-success ml-1" type="submit">
+					<img src="{% static 'img/search.svg' %}" width="25" />
+				</button>
 			</form>
-			<div class="nav-item">
-				<img src="{% static 'img/user.svg' %}" width="20px" />
+			<div class="ml-auto pl-5"></div>
+
+			<div class="dropdown ml-3">
+				<button
+					id="menu"
+					class="btn btn-dark dropdown-toggle"
+					type="button"
+					id="dropdownMenu2"
+					data-toggle="dropdown"
+					aria-haspopup="true"
+					aria-expanded="false"
+				>
+					Anthony Cruz
+				</button>
+				<div class="dropdown-menu dropdown-menu-right bg-dark text-light" aria-labelledby="dropdownMenu2">
+					<a id="texto_menu" href="http://mercatop.herokuapp.com/tela/endereco/listar"
+						><button class="dropdown-item bg-dark text-light" type="button">Meus Endereços</button></a
+					>
+					<a id="texto_menu" href="http://mercatop.herokuapp.com/tela/pedidos"
+						><button class="dropdown-item bg-dark text-light" type="button">Meus Pedidos</button></a
+					>
+					<a id="texto_menu" href="http://mercatop.herokuapp.com/logout"
+						><button class="dropdown-item bg-dark text-light" type="button">Sair</button></a
+					>
+				</div>
 			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
+</div>
