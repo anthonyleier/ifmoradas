@@ -14,4 +14,15 @@
 		{% endfor %}
 	</div>
 </div>
+<div class="paginas">
+	{% if moradias.has_previous %}
+	<a href="?page={{moradias.previous_page_number}}">Anterior</a>
+	{% endif %} 
+	
+	{{moradias.number}} 
+	
+	{% if moradias.has_next %}
+	<a href="?page={{moradias.next_page_number}}">Próximo</a>
+	{% endif %}
+</div>
 {% endblock %}
