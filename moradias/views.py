@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 def home(request):
     data = {}   
 
+    # Pegar todos os imóveis e fazer páginas
     search = request.GET.get('search')
     if search:
         data['moradias'] = Moradia.objects.filter(nome__icontains=search)
@@ -16,7 +17,10 @@ def home(request):
         paginator = Paginator(data['moradias'], 10)
         pages = request.GET.get('page')
         data['moradias'] = paginator.get_page(pages)
-    
+
+    # Pegar o último imóvel para colocar em destaque
+    data['recente'] = Moradia.objects.order_by('-id').get()
+
     return render(request, 'index.html', data)
 
 def novo(request):
@@ -32,7 +36,11 @@ def create(request):
 
 def detalhes(request, pk):
     data = {}
-    data['item'] = Moradia.objects.get(pk=pk)
+    # Pega o imóvel escolhido
+    data['imovel'] = Moradia.objects.get(pk=pk)
+    # Seleciona os 5 imoveis mais recentes
+    data['outros'] = Moradia.objects.order_by('-id')[:4]
+
     return render(request, 'detalhes.html', data)
 
 def editar(request, pk):

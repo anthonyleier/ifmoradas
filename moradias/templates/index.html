@@ -8,8 +8,7 @@
 						<div class="p-4 p-md-5">
 							<div class="badge bg-primary bg-gradient rounded-pill mb-2">Novidades</div>
 							<div class="h2 fw-bolder">Novos imóveis</div>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique delectus ab
-								doloremque, qui doloribus ea officiis...</p>
+							<p>{{recente.descricao}}</p>
 							<a class="stretched-link text-decoration-none" href="#!">
 								Ver novidades
 								<i class="bi bi-arrow-right"></i>
@@ -17,7 +16,7 @@
 						</div>
 					</div>
 					<div class="col-lg-6 col-xl-7">
-						<img class="img-fluid col-12 max-width: 100% justify-content-center" src="../html/img/700x350.png">
+						<img class="img-fluid col-12 max-width: 100% justify-content-center" src="{{recente.imagem1}}">
 					</div>
 				</div>
 			</div>
@@ -42,27 +41,26 @@
 <div class="container my-4">
 	<div class="row text-center">
 		<ul class="pagination justify-content-center shadow-lg p-3 my-3 bg-body rounded">
+
+			<li class="page-item"><a class="page-link text-success" href="?page=1">Primeiro</a></li>
+
 			{% if moradias.has_previous %}
 			<li class="page-item"><a class="page-link" href="?page={{moradias.previous_page_number}}">Anterior</a></li>
+			{% else %}
+			<li class="page-item"><a class="page-link text-muted" href="#">Anterior</a></li>
 			{% endif %}
 
-			<li class="page-item"><a class="page-link" href="#"></a>{{moradias.number}}</a></li>
+			<li class="page-item"><a class="page-link" href="?page={{moradias.number}}">{{moradias.number}}</a></li>
 
 			{% if moradias.has_next %}
 			<li class="page-item"><a class="page-link" href="?page={{moradias.next_page_number}}">Próximo</a></li>
+			{% else %}
+			<li class="page-item"><a class="page-link text-muted" href="#">Próximo</a></li>
 			{% endif %}
+			
+			<li class="page-item"><a class="page-link text-success" href="?page={{moradias.paginator.num_pages}}">Último</a></li>
 		</ul>
 	</div>
 </div>
-<div class="container my-4">
-	<div class="row text-center">
-		<ul class="pagination justify-content-center shadow-lg p-3 my-3 bg-body rounded">
-			<li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">Próximo</a></li>
-		</ul>
-	</div>
-</div>
+
 {% endblock %}
