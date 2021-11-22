@@ -16,9 +16,10 @@
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<form class="d-flex me-auto">
+			<div class="navbar-nav me-auto mb-2 mb-lg-0"></div>
+			<form class="d-flex me-auto" action="/" method="get">
 				<input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" id="search" name="search" />
-				<button class="btn btn-outline-light" type="submit">Pesquisar</button>
+				<button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
 			</form>
 			{% if user.is_authenticated %}
 			<div class="dropdown">
@@ -38,7 +39,7 @@
 				</ul>
 			</div>
 			{% else %}
-				<a href="/telaLogin"><i class="bi bi-person-circle"></i></a>
+			<a href="/telaLogin" style="color: inherit"><i class="bi bi-person-circle"></i></a>
 			{% endif %}
 		</div>
 	</div>
