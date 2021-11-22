@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block conteudo %}
-<section class="py-5">
+{% if not search %}
+<section class="pt-5">
 	<div class="container px-5">
 		<div class="card border-1 shadow rounded-3 overflow-hidden">
 			<div class="card-body p-0">
@@ -9,7 +10,7 @@
 							<div class="badge bg-primary bg-gradient rounded-pill mb-2">Novidades</div>
 							<div class="h2 fw-bolder">Novos imóveis</div>
 							<p>{{recente.descricao}}</p>
-							<a class="stretched-link text-decoration-none" href="#!">
+							<a class="stretched-link text-decoration-none" href="/detalhes/{{recente.id}}">
 								Ver novidades
 								<i class="bi bi-arrow-right"></i>
 							</a>
@@ -23,12 +24,13 @@
 		</div>
 	</div>
 </section>
-<div class="container">
+{% endif %}
+<div class="container pt-5">
 	<div class="row" id="geral">
 		{% for imovel in moradias %}
 		<div class="col-md-3 col-sm-6 my-2" onclick="location.href='/detalhes/{{imovel.id}}';">
 			<div class="card">
-				<img src="{{imovel.imagem1}}" class="card-img-top" alt="{{imovel.imagem1}}" />
+				<img src="{{imovel.imagem1}}" class="card-img-top" alt="{{imovel.imagem1}}" style="max-height: 150px" />
 				<div class="card-body">
 					<h5 class="card-title">{{imovel.nome}}</h5>
 					<b class="card-text text-right">R$ {{imovel.valor}}</b>

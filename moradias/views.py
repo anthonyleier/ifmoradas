@@ -10,16 +10,17 @@ def home(request):
     search = request.GET.get('search')
     if search:
         data['moradias'] = Moradia.objects.filter(nome__icontains=search)
+        data['search'] = True
     else:
         data['moradias'] = Moradia.objects.all()
 
     if len(data['moradias']) > 0:
-        paginator = Paginator(data['moradias'], 10)
+        paginator = Paginator(data['moradias'], 8)
         pages = request.GET.get('page')
         data['moradias'] = paginator.get_page(pages)
 
     # Pegar o último imóvel para colocar em destaque
-    data['recente'] = Moradia.objects.order_by('-id').get()
+    data['recente'] = Moradia.objects.order_by('-id')[0]
 
     return render(request, 'index.html', data)
 
