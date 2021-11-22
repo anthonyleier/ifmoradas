@@ -17,9 +17,10 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<form class="d-flex me-auto">
-				<input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" id="search" name="search"/>
+				<input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" id="search" name="search" />
 				<button class="btn btn-outline-light" type="submit">Pesquisar</button>
 			</form>
+			{% if user.is_authenticated %}
 			<div class="dropdown">
 				<button
 					class="btn btn-outline-light dropdown-toggle"
@@ -28,14 +29,17 @@
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
 				>
-					Anthony Cruz
+					{{user.first_name}} {{user.last_name}}
 				</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 					<li><a class="dropdown-item" href="/novo">Adicionar novo imóvel</a></li>
 					<li><a class="dropdown-item" href="#">Ver seus imóveis</a></li>
-					<li><a class="dropdown-item" href="#">Sair</a></li>
+					<li><a class="dropdown-item" href="/logout">Sair</a></li>
 				</ul>
 			</div>
+			{% else %}
+				<a href="/telaLogin"><i class="bi bi-person-circle"></i></a>
+			{% endif %}
 		</div>
 	</div>
 </nav>

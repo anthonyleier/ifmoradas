@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from moradias.forms import MoradiaForm
 from moradias.models import Moradia
 from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, login, logout
 
 def home(request):
     data = {}   
@@ -61,4 +62,22 @@ def update(request, pk):
 def remover(request, pk):
     db = Moradia.objects.get(pk=pk)
     db.delete()
+    return redirect('home')
+
+def telaLogin(request):
+    return render(request, 'login.html')
+
+def logar(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('home')
+    else:
+        return redirect('home')
+
+
+def deslogar(request):
+    logout(request)
     return redirect('home')
