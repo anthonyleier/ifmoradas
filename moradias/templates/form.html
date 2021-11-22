@@ -1,36 +1,36 @@
 {% extends 'base.html' %} {% block conteudo %}
 <div class="container shadow-lg p-3 my-3 bg-body rounded">
 	<div class="col-8 m-auto pt-2 pb-2 text-center">
-		<h1>Formulário</h1>
+		<h1>Adicionar novo imóvel</h1>
 	</div>
-	<div class="col-8 m-auto pt-2>s pb-2 text-center">
-		<form name="form" id="form">
+	<div class="col-8 m-auto pt-2>s pb-2 text-center mt-3">
+		<form name="form" id="form" action="{% if moradias %} /update/{{moradias.id}}/ {% else %} /create/ {%endif%}" method="post">
+		{% csrf_token %}
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingInput" placeholder="text" />
-				<label for="floatingInput">Campo 1</label>
+				<input type="text" class="form-control" id="floatingInput" placeholder="text" name="nome" maxlength="50" required id="id_nome">
+				<label for="floatingInput">Título</label>				
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingInput" placeholder="text" />
-				<label for="floatingInput">Campo 2</label>
+				<input type="text" class="form-control" id="floatingInput" placeholder="text" name="descricao" maxlength="500" required id="id_descricao">
+				<label for="floatingInput">Descrição</label>				
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingInput" placeholder="text" />
-				<label for="floatingInput">Campo 3</label>
+				<input type="text" class="form-control" id="floatingInput" placeholder="text" name="valor" step="0.01" required id="id_valor">
+				<label for="floatingInput">Valor</label>				
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingInput" placeholder="text" />
-				<label for="floatingInput">Campo 4</label>
+				<input type="text" class="form-control" id="floatingInput" placeholder="text" name="imagem1" maxlength="500" required id="id_imagem1">
+				<label for="floatingInput">Imagem 1</label>				
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingInput" placeholder="text" />
-				<label for="floatingInput">Campo 5</label>
+				<input type="text" class="form-control" id="floatingInput" placeholder="text" name="imagem2" maxlength="500" required id="id_imagem2">
+				<label for="floatingInput">Imagem 2</label>				
 			</div>
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingInput" placeholder="text" />
-				<label for="floatingInput">Campo 6</label>
+				<input type="text" class="form-control" id="floatingInput" placeholder="text"  name="imagem3" maxlength="500" required id="id_imagem3">
+				<label for="floatingInput">Imagem 3</label>
 			</div>
 			<div class="d-grid gap-2 d-md-block">
-				<a href="/" class="btn btn-outline-secondary">Voltar</a>
 				<input type="submit" class="btn btn-success" value="Salvar" />
 			</div>
 		</form>
