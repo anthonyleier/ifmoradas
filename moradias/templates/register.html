@@ -1,0 +1,11 @@
+<form action="/registrar" method="post">
+	{% csrf_token %}
+
+	<input type="text" name="username" placeholder="username"/>
+	<input type="password" name="password" placeholder="password"/>
+	<input type="text" name="first_name" placeholder="first_name"/>
+	<input type="text" name="last_name" placeholder="last_name"/>
+	<input type="text" name="email" placeholder="email"/>
+	<input type="text" name="telefone" placeholder="telefone"/>
+	<input type="submit" />
+</form>

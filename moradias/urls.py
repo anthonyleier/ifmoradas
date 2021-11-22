@@ -12,6 +12,8 @@ urlpatterns = [
     path('update/<int:pk>/', views.update, name='update'),
 
     path('telaLogin', views.telaLogin, name='telaLogin'),
+    path('telaRegistro', views.telaRegistro, name='telaRegistro'),
+    path('registrar', views.registrar, name='registrar'),
     path('logar', views.logar, name='logar'),
     path('logout', views.deslogar, name='logout'),
 ]
