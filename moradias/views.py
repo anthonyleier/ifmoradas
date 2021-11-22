@@ -5,6 +5,10 @@ from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
+def erro(request, mensagem):
+    data = {}
+    data['erro'] = mensagem
+    return render(request, 'erro.html', data)
 
 def home(request):
     data = {}
@@ -35,10 +39,13 @@ def novo(request):
 
 
 def create(request):
-    form = MoradiaForm(request.POST or None)
+    form = MoradiaForm(request.POST, request.FILES)
+    print(form)
     if form.is_valid():
         form.save()
         return redirect('home')
+    else:
+        return erro(request, form)
 
 
 def detalhes(request, pk):
@@ -65,6 +72,8 @@ def update(request, pk):
     if form.is_valid():
         form.save()
         return redirect('home')
+    else:
+        return erro(request, form.errors)
 
 
 def remover(request, pk):
@@ -85,7 +94,7 @@ def logar(request):
         login(request, user)
         return redirect('home')
     else:
-        return redirect('home')
+        return erro(request, "Não foi possível realizar o login utilizando essas credenciais.")
 
 
 def deslogar(request):

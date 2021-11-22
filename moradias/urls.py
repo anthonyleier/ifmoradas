@@ -11,6 +11,8 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('update/<int:pk>/', views.update, name='update'),
 
+    path('erro/', views.erro, name='erro'),
+
     path('telaLogin', views.telaLogin, name='telaLogin'),
     path('telaRegistro', views.telaRegistro, name='telaRegistro'),
     path('registrar', views.registrar, name='registrar'),
