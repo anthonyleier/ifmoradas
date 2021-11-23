@@ -1,8 +1,31 @@
-<form action="/logar" method="post">
-	{% csrf_token %}
-
-	<input type="text" name="username" />
-	<input type="password" name="password" />
-	<input type="submit" />
-</form>
-<a href="/telaRegistro">Registre-se agora!</a>
+{% extends 'base.html' %} {% block conteudo %}
+{% load static %}
+<main class="form-signin">
+	<div class="container" style="margin-top: 5%">
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<form class="" action="/logar" method="post">
+					{% csrf_token %}
+					<div class="text-center">
+						<img class="mb-4" src="{% static 'img/ifsc.png' %}" alt="" width="72" height="72" />
+						<h1 class="h3 mb-3 fw-normal">Login IFMoradas</h1>
+					</div>
+					<div class="form-floating mt-5">
+						<input type="text" name="username" class="form-control" id="floatingInput" placeholder="email@gmail.com" />
+						<label for="floatingInput">Informe seu Login</label>
+					</div>
+					<div class="form-floating mt-3">
+						<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" />
+						<label for="floatingPassword">Informe sua senha</label>
+					</div>
+					<button class="w-100 btn btn-lg btn-success mt-3" type="submit">Acessar</button>
+					<p class="text-center pt-3"><a class="text-decoration-none text-reset" href="/telaRegistro">Registre-se agora!</a></p>
+					<p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>
+				</form>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
+</main>
+{% endblock %}

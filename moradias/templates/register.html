@@ -1,11 +1,40 @@
-<form action="/registrar" method="post">
-	{% csrf_token %}
-
-	<input type="text" name="username" placeholder="username"/>
-	<input type="password" name="password" placeholder="password"/>
-	<input type="text" name="first_name" placeholder="first_name"/>
-	<input type="text" name="last_name" placeholder="last_name"/>
-	<input type="text" name="email" placeholder="email"/>
-	<input type="text" name="telefone" placeholder="telefone"/>
-	<input type="submit" />
-</form>
+{% extends 'base.html' %} {% block conteudo %} {% load static %}
+<main class="form-signin">
+	<div class="container px-md-5" style="margin-top: 5%">
+		<form class="row px-md-5 g-3 pb-5 needs-validation" action="/registrar" method="post">
+			{% csrf_token %}
+			<div class="col-12 text-center">
+				<img class="mb-4" src="{% static 'img/ifsc.png' %}" alt="" width="72" height="72" />
+				<h1 class="h3 mb-3 fw-normal">Registro IFMoradas</h1>
+			</div>
+			<div class="col-md-4">
+				<label for="validationCustom01" class="form-label">Nome</label>
+				<input type="text" class="form-control" id="validationCustom01" name="first_name" required />
+			</div>
+			<div class="col-md-4">
+				<label for="validationCustom02" class="form-label">Sobrenome</label>
+				<input type="text" class="form-control" id="validationCustom02"  name="last_name" required />
+			</div>
+			<div class="col-md-4">
+				<label for="validationCustom02" class="form-label">Telefone</label>
+				<input type="tel" class="form-control" id="validationCustom02" name="telefone" required />
+			</div>
+			<div class="col-md-12">
+				<div class="form-floating">
+					<input type="email" class="form-control" id="floatingInput" name="email" placeholder="nome@exemplo.com" />
+					<label for="floatingInput">E-mail</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-floating">
+					<input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Senha" />
+					<label for="floatingPassword">Senha</label>
+				</div>
+			</div>
+			<div class="col-12">
+				<button class="btn btn-success float-end" type="submit">Registrar</button>
+			</div>
+		</form>
+	</div>
+</main>
+{% endblock %}

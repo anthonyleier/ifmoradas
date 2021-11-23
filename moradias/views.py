@@ -107,7 +107,7 @@ def telaRegistro(request):
 
 
 def registrar(request):
-    usuario = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+    usuario = User.objects.create_user(request.POST['email'], request.POST['email'], request.POST['password'])
     usuario.first_name = request.POST['first_name']
     usuario.last_name = request.POST['last_name']
     usuario.save()
