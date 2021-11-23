@@ -1,14 +1,16 @@
 from django.shortcuts import redirect, render
-from moradias.forms import MoradiaForm
-from moradias.models import Moradia
+from moradias.forms import MoradiaForm, ImagemForm
+from moradias.models import Moradia, Imagem
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+
 
 def erro(request, mensagem):
     data = {}
     data['erro'] = mensagem
     return render(request, 'erro.html', data)
+
 
 def home(request):
     data = {}
@@ -36,6 +38,23 @@ def novo(request):
     data = {}
     data['form'] = MoradiaForm()
     return render(request, 'form.html', data)
+
+
+def telaImagem(request):
+    data = {}
+    data['form'] = ImagemForm()
+    return render(request, 'imagem.html', data)
+
+
+def novaImagem(request):
+    form = ImagemForm(request.POST, request.FILES)
+    if form.is_valid():
+        nova_imagem = Imagem(arquivo=request.FILES['arquivo'])
+        nova_imagem.save()
+
+        return redirect('home')
+    else:
+        return erro(request, form)
 
 
 def create(request):
@@ -107,7 +126,8 @@ def telaRegistro(request):
 
 
 def registrar(request):
-    usuario = User.objects.create_user(request.POST['email'], request.POST['email'], request.POST['password'])
+    usuario = User.objects.create_user(
+        request.POST['email'], request.POST['email'], request.POST['password'])
     usuario.first_name = request.POST['first_name']
     usuario.last_name = request.POST['last_name']
     usuario.save()

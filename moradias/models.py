@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Moradia(models.Model):
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=500)
@@ -7,3 +8,7 @@ class Moradia(models.Model):
     imagem1 = models.ImageField(upload_to='imoveis')
     imagem2 = models.ImageField(upload_to='imoveis')
     imagem3 = models.ImageField(upload_to='imoveis')
+
+
+class Imagem(models.Model):
+    arquivo = models.FileField(upload_to='documents/%Y/%m/%d')
