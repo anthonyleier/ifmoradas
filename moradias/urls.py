@@ -22,7 +22,9 @@ urlpatterns = [
     path('logout', views.deslogar, name='logout'),
 
     path('telaImagem/<int:pk>/', views.telaImagem, name='telaImagem'),
-    path('novaImagem', views.novaImagem, name="novaImagem")
+    path('novaImagem', views.novaImagem, name="novaImagem"),
+
+    path('meusImoveis', views.meusImoveis, name="meusImoveis"),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 

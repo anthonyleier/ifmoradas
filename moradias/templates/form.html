@@ -6,6 +6,8 @@
 	<div class="col-8 m-auto pt-2>s pb-2 text-center mt-3">
 		<form name="form" id="form" action="{% if moradias %} /update/{{moradias.id}}/ {% else %} /create/ {%endif%}" method="post">
 			{% csrf_token %}
+			<input type="hidden" value="{{user.id}}" name="dono" />
+
 			<div class="form-floating mb-3">
 				<input
 					type="text"

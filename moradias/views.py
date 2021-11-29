@@ -1,3 +1,4 @@
+from django.forms.widgets import DateTimeBaseInput
 from django.shortcuts import redirect, render
 from moradias.forms import MoradiaForm, ImagemForm
 from moradias.models import Moradia, Imagem
@@ -31,13 +32,17 @@ def home(request):
         data['moradias'] = paginator.get_page(pages)
 
     # Pegar o último imóvel para colocar em destaque
-    data['recente'] = Moradia.objects.order_by('-id')[0]
-    data['imagemRecente'] = Imagem.objects.filter(imovel=data['recente'].id).order_by('-id')[0]
-
+    try:
+        data['recente'] = Moradia.objects.order_by('-id')[0]
+        data['imagemRecente'] = Imagem.objects.filter(imovel=data['recente'].id).order_by('-id')[0]
+    except:
+        print("Erro")
     imagens = []
     for moradia in data['moradias']:
-        imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
-
+        try:
+            imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
+        except:
+            print("Erro")
     data['imagens'] = imagens 
     return render(request, 'index.html', data)
 
@@ -99,7 +104,10 @@ def detalhes(request, pk):
     
     imagens = []
     for moradia in data['moradias']:
-        imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
+        try:
+            imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
+        except:
+            print("Erro")
 
     data['imagens'] = imagens
     return render(request, 'detalhes.html', data)
@@ -164,3 +172,24 @@ def registrar(request):
     usuario.last_name = request.POST['last_name']
     usuario.save()
     return redirect('home')
+
+def meusImoveis(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
+    data = {}
+
+    data['moradias'] = Moradia.objects.filter(dono=request.user.id)
+
+    if len(data['moradias']) > 0:
+        paginator = Paginator(data['moradias'], 8)
+        pages = request.GET.get('page')
+        data['moradias'] = paginator.get_page(pages)
+
+    imagens = []
+    for moradia in data['moradias']:
+        try:
+            imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
+        except:
+            print("Erro")
+    data['imagens'] = imagens 
+    
+    return render(request, 'proprio.html', data)

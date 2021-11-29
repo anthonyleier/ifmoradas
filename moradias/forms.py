@@ -6,7 +6,7 @@ from moradias.models import Moradia
 class MoradiaForm(ModelForm):
     class Meta:
         model = Moradia
-        fields = ['nome', 'descricao', 'valor']
+        fields = ['nome', 'descricao', 'valor', 'dono']
 
 
 class ImagemForm(forms.Form):

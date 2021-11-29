@@ -1,41 +1,12 @@
-{% extends 'base.html' %} {% block conteudo %}
-{% load static %}
-{% if not search %}
-<section class="pt-5">
-	<div class="container px-5">
-		<div class="card border-1 shadow rounded-3 overflow-hidden">
-			<div class="card-body p-0">
-				<div class="row gx-0">
-					<div class="col-lg-6 col-xl-5 py-lg-5">
-						<div class="p-4 p-md-5">
-							<div class="badge bg-success bg-gradient rounded-pill mb-2">Novidades</div>
-							<div class="h2 fw-bolder">Novos imóveis</div>
-							<p>{{recente.descricao}}</p>
-							<a class="stretched-link text-decoration-none" href="/detalhes/{{recente.id}}">
-								Ver novidades
-								<i class="bi bi-arrow-right"></i>
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-6 col-xl-7">
-						<img class="img-fluid col-12 max-width: 100% justify-content-center" src="{% get_media_prefix %}{{imagemRecente.arquivo}}">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-{% endif %}
+{% extends 'base.html' %} {% block conteudo %} {% load static %}
 <div class="container pt-5">
 	<div class="row" id="geral">
 		{% for imovel in moradias %}
 		<div class="col-md-3 col-sm-6 my-2" onclick="location.href='/detalhes/{{imovel.id}}';">
 			<div class="card">
-				{% for imagem in imagens %}
-					{% if imovel.id == imagem.imovel %}
-						<img src="{% get_media_prefix %}{{imagem.arquivo}}" class="card-img-top" style="max-height: 150px" />
-					{% endif %}
-				{% endfor %}
+				{% for imagem in imagens %} {% if imovel.id == imagem.imovel %}
+				<img src="{% get_media_prefix %}{{imagem.arquivo}}" class="card-img-top" style="max-height: 150px" />
+				{% endif %} {% endfor %}
 				<div class="card-body">
 					<h5 class="card-title">{{imovel.nome}}</h5>
 					<b class="card-text text-right">R$ {{imovel.valor}}</b>
@@ -48,7 +19,6 @@
 <div class="container my-4">
 	<div class="row text-center">
 		<ul class="pagination justify-content-center shadow-lg p-3 my-3 bg-body rounded">
-
 			<li class="page-item"><a class="page-link text-success" href="?page=1">Primeiro</a></li>
 
 			{% if moradias.has_previous %}
@@ -64,10 +34,9 @@
 			{% else %}
 			<li class="page-item"><a class="page-link text-muted" href="#">Próximo</a></li>
 			{% endif %}
-			
+
 			<li class="page-item"><a class="page-link text-success" href="?page={{moradias.paginator.num_pages}}">Último</a></li>
 		</ul>
 	</div>
 </div>
-
 {% endblock %}

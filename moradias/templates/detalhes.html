@@ -41,10 +41,31 @@
 				</div>
 				<p class="lead">{{imovel.descricao}}</p>
 				<div class="d-flex mt-5">
-					<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-						<a href="/contato" class="btn btn-outline-success"><i class="bi bi-arrow-right me-1"></i> Entrar em contato</a>
-						<a href="/editar/{{imovel.id}}" class="btn btn-success"><i class="bi bi-gear-fill"></i></a>
-						<a href="/telaImagem/{{imovel.id}}" class="btn btn-success"><i class="bi bi-image-fill"></i></a>
+					<div class="btn-group" role="group">
+						<a
+							href="/contato"
+							class="btn btn-outline-success"
+							data-bs-toggle="tooltip"
+							data-bs-placement="top"
+							title="Entrar em contato"
+							><i class="bi bi-arrow-right me-1"></i> Entrar em contato</a
+						>
+						<a
+							href="/editar/{{imovel.id}}"
+							class="btn btn-success"
+							data-bs-toggle="tooltip"
+							data-bs-placement="top"
+							title="Editar Imóvel"
+							><i class="bi bi-gear-fill"></i
+						></a>
+						<a
+							href="/telaImagem/{{imovel.id}}"
+							class="btn btn-success"
+							data-bs-toggle="tooltip"
+							data-bs-placement="top"
+							title="Gerenciador de Imagens"
+							><i class="bi bi-image-fill"></i
+						></a>
 					</div>
 				</div>
 			</div>
