@@ -43,13 +43,14 @@
 				<div class="d-flex mt-5">
 					<div class="btn-group" role="group">
 						<a
-							href="/contato"
+							href="mailto:{{dono.email}}"
 							class="btn btn-outline-success"
 							data-bs-toggle="tooltip"
 							data-bs-placement="top"
 							title="Entrar em contato"
 							><i class="bi bi-arrow-right me-1"></i> Entrar em contato</a
 						>
+						{% if user.id == imovel.dono %}
 						<a
 							href="/editar/{{imovel.id}}"
 							class="btn btn-success"
@@ -66,6 +67,7 @@
 							title="Gerenciador de Imagens"
 							><i class="bi bi-image-fill"></i
 						></a>
+						{% endif %}
 					</div>
 				</div>
 			</div>

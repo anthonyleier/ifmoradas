@@ -64,15 +64,17 @@ def telaImagem(request, pk):
 
 def novaImagem(request):
     if not request.user.is_authenticated: return redirect('telaLogin')
-    
-    nova_imagem1 = Imagem(arquivo=request.FILES['imagem1'], imovel=request.POST['imovel'])
-    nova_imagem1.save()
-    nova_imagem2 = Imagem(arquivo=request.FILES['imagem2'], imovel=request.POST['imovel'])
-    nova_imagem2.save()
-    nova_imagem3 = Imagem(arquivo=request.FILES['imagem3'], imovel=request.POST['imovel'])
-    nova_imagem3.save()
-    nova_imagem4 = Imagem(arquivo=request.FILES['imagem4'], imovel=request.POST['imovel'])
-    nova_imagem4.save()
+    try:
+        nova_imagem1 = Imagem(arquivo=request.FILES['imagem1'], imovel=request.POST['imovel'])
+        nova_imagem1.save()
+        nova_imagem2 = Imagem(arquivo=request.FILES['imagem2'], imovel=request.POST['imovel'])
+        nova_imagem2.save()
+        nova_imagem3 = Imagem(arquivo=request.FILES['imagem3'], imovel=request.POST['imovel'])
+        nova_imagem3.save()
+        nova_imagem4 = Imagem(arquivo=request.FILES['imagem4'], imovel=request.POST['imovel'])
+        nova_imagem4.save()
+    except:
+        print("Erro")
 
     return redirect('home')
 
@@ -98,9 +100,11 @@ def detalhes(request, pk):
     data['moradias'] = Moradia.objects.order_by('-id')[:4]
 
     # Pega as últimas 5 fotos desse imóvel
-    data['fotos'] = Imagem.objects.filter(imovel=pk).order_by('-id')[:3]
+    data['fotos'] = Imagem.objects.filter(imovel=pk).order_by('-id')[1:3]
 
     data['principal'] = Imagem.objects.filter(imovel=pk).order_by('-id')[0]
+    print(data['imovel'].dono)
+    data['dono'] = User.objects.filter(id=data['imovel'].dono)[0]
     
     imagens = []
     for moradia in data['moradias']:
