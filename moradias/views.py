@@ -7,12 +7,14 @@ from django.contrib.auth.models import User
 
 
 def erro(request, mensagem):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['erro'] = mensagem
     return render(request, 'erro.html', data)
 
 
 def home(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
 
     # Pegar todos os imóveis e fazer páginas
@@ -35,18 +37,21 @@ def home(request):
 
 
 def novo(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['form'] = MoradiaForm()
     return render(request, 'form.html', data)
 
 
 def telaImagem(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['form'] = ImagemForm()
     return render(request, 'imagem.html', data)
 
 
 def novaImagem(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     form = ImagemForm(request.POST, request.FILES)
     if form.is_valid():
         nova_imagem = Imagem(arquivo=request.FILES['arquivo'])
@@ -58,6 +63,7 @@ def novaImagem(request):
 
 
 def create(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     form = MoradiaForm(request.POST, request.FILES)
     print(form)
     if form.is_valid():
@@ -68,6 +74,7 @@ def create(request):
 
 
 def detalhes(request, pk):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     # Pega o imóvel escolhido
     data['imovel'] = Moradia.objects.get(pk=pk)
@@ -78,6 +85,7 @@ def detalhes(request, pk):
 
 
 def editar(request, pk):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['moradias'] = Moradia.objects.get(pk=pk)
     data['form'] = MoradiaForm(instance=data['moradias'])
@@ -85,6 +93,7 @@ def editar(request, pk):
 
 
 def update(request, pk):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['moradias'] = Moradia.objects.get(pk=pk)
     form = MoradiaForm(request.POST or None, instance=data['moradias'])
@@ -96,16 +105,19 @@ def update(request, pk):
 
 
 def remover(request, pk):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     db = Moradia.objects.get(pk=pk)
     db.delete()
     return redirect('home')
 
 
 def telaLogin(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     return render(request, 'login.html')
 
 
 def logar(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
@@ -117,15 +129,18 @@ def logar(request):
 
 
 def deslogar(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     logout(request)
     return redirect('home')
 
 
 def telaRegistro(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     return render(request, 'register.html')
 
 
 def registrar(request):
+    if not request.user.is_authenticated: return redirect('telaLogin')
     usuario = User.objects.create_user(
         request.POST['email'], request.POST['email'], request.POST['password'])
     usuario.first_name = request.POST['first_name']
