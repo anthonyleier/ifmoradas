@@ -1,9 +1,19 @@
 {% extends 'base.html' %} {% block conteudo %}
-
-<form action="{% url 'novaImagem' %}" method="post" enctype="multipart/form-data">
-	{% csrf_token %} 
-	<input type="file" name="arquivo" required id="id_arquivo">
-	<p><input type="submit" value="Upload" /></p>
-</form>
+<div class="container shadow-lg p-3 my-3 bg-body rounded">
+	<div class="col-8 m-auto pt-2 pb-2 text-center">
+		<h1>Adicionar novo imóvel</h1>
+	</div>
+	<div class="col-8 m-auto pt-2>s pb-2 text-center mt-3">
+		<form action="{% url 'novaImagem' %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="hidden" name="imovel" value="{{imovel}}" />
+			<input type="file" name="imagem1" required id="id_imagem1" />
+			<input type="file" name="imagem2" required id="id_imagem2" />
+			<input type="file" name="imagem3" required id="id_imagem3" />
+			<input type="file" name="imagem4" required id="id_imagem4" />
+			<p><input type="submit" value="Upload" /></p>
+		</form>
+	</div>
+</div>
 
 {% endblock %}

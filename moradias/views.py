@@ -43,23 +43,27 @@ def novo(request):
     return render(request, 'form.html', data)
 
 
-def telaImagem(request):
+def telaImagem(request, pk):
     if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['form'] = ImagemForm()
+    data['imovel'] = pk
     return render(request, 'imagem.html', data)
 
 
 def novaImagem(request):
     if not request.user.is_authenticated: return redirect('telaLogin')
-    form = ImagemForm(request.POST, request.FILES)
-    if form.is_valid():
-        nova_imagem = Imagem(arquivo=request.FILES['arquivo'])
-        nova_imagem.save()
+    
+    nova_imagem1 = Imagem(arquivo=request.FILES['imagem1'], imovel=request.POST['imovel'])
+    nova_imagem1.save()
+    nova_imagem2 = Imagem(arquivo=request.FILES['imagem2'], imovel=request.POST['imovel'])
+    nova_imagem2.save()
+    nova_imagem3 = Imagem(arquivo=request.FILES['imagem3'], imovel=request.POST['imovel'])
+    nova_imagem3.save()
+    nova_imagem4 = Imagem(arquivo=request.FILES['imagem4'], imovel=request.POST['imovel'])
+    nova_imagem4.save()
 
-        return redirect('home')
-    else:
-        return erro(request, form)
+    return redirect('home')
 
 
 def create(request):
@@ -68,7 +72,7 @@ def create(request):
     print(form)
     if form.is_valid():
         form.save()
-        return redirect('home')
+        return redirect('telaImagem')
     else:
         return erro(request, form)
 
@@ -78,8 +82,12 @@ def detalhes(request, pk):
     data = {}
     # Pega o imóvel escolhido
     data['imovel'] = Moradia.objects.get(pk=pk)
+
     # Seleciona os 5 imoveis mais recentes
     data['outros'] = Moradia.objects.order_by('-id')[:4]
+
+    # Pega as últimas 5 fotos desse imóvel
+    data['fotos'] = Imagem.objects.filter(imovel=pk).order_by('-id')[:3]
 
     return render(request, 'detalhes.html', data)
 
@@ -112,12 +120,10 @@ def remover(request, pk):
 
 
 def telaLogin(request):
-    if not request.user.is_authenticated: return redirect('telaLogin')
     return render(request, 'login.html')
 
 
 def logar(request):
-    if not request.user.is_authenticated: return redirect('telaLogin')
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)

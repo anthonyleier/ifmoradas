@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -19,7 +21,8 @@ urlpatterns = [
     path('logar', views.logar, name='logar'),
     path('logout', views.deslogar, name='logout'),
 
-    path('telaImagem', views.telaImagem, name='telaImagem'),
+    path('telaImagem/<int:pk>/', views.telaImagem, name='telaImagem'),
     path('novaImagem', views.novaImagem, name="novaImagem")
 
-]
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
