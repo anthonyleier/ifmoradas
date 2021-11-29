@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% block conteudo %}
-{% load static %}
+{% extends 'base.html' %} {% block conteudo %} {% load static %}
 
 <section>
 	<div class="container px-4 px-lg-5 my-5 shadow-lg p-3 mb-5 bg-body rounded">
@@ -8,11 +7,20 @@
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img class="card-img-top mb-5 mb-md-0" src="{% get_media_prefix %}{{principal.arquivo}}" style="max-height: 350px" />
+							<img
+								class="card-img-top mb-5 mb-md-0"
+								src="{% get_media_prefix %}{{principal.arquivo}}"
+								style="max-height: 350px"
+							/>
 						</div>
 						{% for foto in fotos %}
 						<div class="carousel-item">
-							<img class="card-img-top mb-5 mb-md-0" src="{% get_media_prefix %}{{foto.arquivo}}" alt="{{foto.arquivo}}" style="max-height: 350px" />
+							<img
+								class="card-img-top mb-5 mb-md-0"
+								src="{% get_media_prefix %}{{foto.arquivo}}"
+								alt="{{foto.arquivo}}"
+								style="max-height: 350px"
+							/>
 						</div>
 						{% endfor %}
 					</div>
@@ -27,18 +35,17 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-						<h1 class="display-5 fw-bolder">{{imovel.nome}}</h1>
+				<h1 class="display-5 fw-bolder">{{imovel.nome}}</h1>
 				<div class="fs-5 mb-5">
 					<span>R${{imovel.valor}}</span>
 				</div>
-				<p class="lead">
-					{{imovel.descricao}}
-				</p>
+				<p class="lead">{{imovel.descricao}}</p>
 				<div class="d-flex mt-5">
-					<button class="btn btn-outline-success flex-shrink-0" type="button">
-						<i class="bi bi-arrow-right me-1"></i>
-						Entrar em contato
-					</button>
+					<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+						<a href="/contato" class="btn btn-outline-success"><i class="bi bi-arrow-right me-1"></i> Entrar em contato</a>
+						<a href="/editar/{{imovel.id}}" class="btn btn-success"><i class="bi bi-gear-fill"></i></a>
+						<a href="/telaImagem/{{imovel.id}}" class="btn btn-success"><i class="bi bi-image-fill"></i></a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -52,11 +59,9 @@
 				{% for imovel in moradias %}
 				<div class="col-md-3 col-sm-6 my-2" onclick="location.href='/detalhes/{{imovel.id}}';">
 					<div class="card">
-						{% for imagem in imagens %}
-							{% if imovel.id == imagem.imovel %}
-								<img src="{% get_media_prefix %}{{imagem.arquivo}}" class="card-img-top" style="max-height: 150px" />
-							{% endif %}
-						{% endfor %}
+						{% for imagem in imagens %} {% if imovel.id == imagem.imovel %}
+						<img src="{% get_media_prefix %}{{imagem.arquivo}}" class="card-img-top" style="max-height: 150px" />
+						{% endif %} {% endfor %}
 						<div class="card-body">
 							<h5 class="card-title">{{imovel.nome}}</h5>
 							<b class="card-text text-right">R$ {{imovel.valor}}</b>

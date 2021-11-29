@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block conteudo %}
 <div class="container shadow-lg p-3 my-3 bg-body rounded">
 	<div class="col-8 m-auto pt-2 pb-2 text-center">
-		<h1>Adicionar novo imóvel</h1>
+		<h1>Formulário de Imóvel</h1>
 	</div>
 	<div class="col-8 m-auto pt-2>s pb-2 text-center mt-3">
 		<form name="form" id="form" action="{% if moradias %} /update/{{moradias.id}}/ {% else %} /create/ {%endif%}" method="post">
@@ -16,6 +16,7 @@
 					maxlength="50"
 					required
 					id="id_nome"
+					value="{{moradias.nome}}"
 				/>
 				<label for="floatingInput">Título</label>
 			</div>
@@ -29,6 +30,7 @@
 					maxlength="500"
 					required
 					id="id_descricao"
+					value="{{moradias.descricao}}"
 				/>
 				<label for="floatingInput">Descrição</label>
 			</div>
@@ -42,6 +44,7 @@
 					step="0.01"
 					required
 					id="id_valor"
+					value="{{moradias.valor}}"
 				/>
 				<label for="floatingInput">Valor</label>
 			</div>
