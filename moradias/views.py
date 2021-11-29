@@ -154,12 +154,10 @@ def deslogar(request):
 
 
 def telaRegistro(request):
-    if not request.user.is_authenticated: return redirect('telaLogin')
     return render(request, 'register.html')
 
 
 def registrar(request):
-    if not request.user.is_authenticated: return redirect('telaLogin')
     usuario = User.objects.create_user(
         request.POST['email'], request.POST['email'], request.POST['password'])
     usuario.first_name = request.POST['first_name']
