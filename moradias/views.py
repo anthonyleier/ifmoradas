@@ -77,8 +77,8 @@ def create(request):
     form = MoradiaForm(request.POST, request.FILES)
     print(form)
     if form.is_valid():
-        form.save()
-        return redirect('telaImagem')
+        retorno = form.save()
+        return redirect("telaImagem", retorno.id)
     else:
         return erro(request, form)
 
@@ -95,6 +95,8 @@ def detalhes(request, pk):
     # Pega as últimas 5 fotos desse imóvel
     data['fotos'] = Imagem.objects.filter(imovel=pk).order_by('-id')[:3]
 
+    data['principal'] = Imagem.objects.filter(imovel=pk).order_by('-id')[0]
+    
     imagens = []
     for moradia in data['moradias']:
         imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
