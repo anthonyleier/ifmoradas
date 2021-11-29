@@ -9,4 +9,4 @@ class Moradia(models.Model):
 
 class Imagem(models.Model):
     imovel = models.IntegerField(null=True)
-    arquivo = models.FileField(upload_to='documents/%Y/%m/%d')
+    arquivo = models.FileField(upload_to=f'imoveis/')

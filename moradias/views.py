@@ -32,7 +32,13 @@ def home(request):
 
     # Pegar o último imóvel para colocar em destaque
     data['recente'] = Moradia.objects.order_by('-id')[0]
+    data['imagemRecente'] = Imagem.objects.filter(imovel=data['recente'].id).order_by('-id')[0]
 
+    imagens = []
+    for moradia in data['moradias']:
+        imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
+
+    data['imagens'] = imagens 
     return render(request, 'index.html', data)
 
 
@@ -84,11 +90,16 @@ def detalhes(request, pk):
     data['imovel'] = Moradia.objects.get(pk=pk)
 
     # Seleciona os 5 imoveis mais recentes
-    data['outros'] = Moradia.objects.order_by('-id')[:4]
+    data['moradias'] = Moradia.objects.order_by('-id')[:4]
 
     # Pega as últimas 5 fotos desse imóvel
     data['fotos'] = Imagem.objects.filter(imovel=pk).order_by('-id')[:3]
 
+    imagens = []
+    for moradia in data['moradias']:
+        imagens.append(Imagem.objects.filter(imovel=moradia.id).order_by('-id')[0])
+
+    data['imagens'] = imagens
     return render(request, 'detalhes.html', data)
 
 

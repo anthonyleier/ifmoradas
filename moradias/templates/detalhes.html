@@ -46,13 +46,17 @@
 		<h2 class="fw-bolder mb-4">Outros Imóveis</h2>
 		<div class="container">
 			<div class="row" id="geral">
-				{% for outro in outros %}
-				<div class="col-md-3 col-sm-6 my-2" onclick="location.href='/detalhes/{{outro.id}}';">
+				{% for imovel in moradias %}
+				<div class="col-md-3 col-sm-6 my-2" onclick="location.href='/detalhes/{{imovel.id}}';">
 					<div class="card">
-						<img src="{{outro.imagem1}}" class="card-img-top" alt="{{outro.imagem1}}" style="max-height: 150px" />
+						{% for imagem in imagens %}
+							{% if imovel.id == imagem.imovel %}
+								<img src="{% get_media_prefix %}{{imagem.arquivo}}" class="card-img-top" style="max-height: 150px" />
+							{% endif %}
+						{% endfor %}
 						<div class="card-body">
-							<h5 class="card-title">{{outro.nome}}</h5>
-							<b class="card-text text-right">R${{outro.valor}}</b>
+							<h5 class="card-title">{{imovel.nome}}</h5>
+							<b class="card-text text-right">R$ {{imovel.valor}}</b>
 						</div>
 					</div>
 				</div>
