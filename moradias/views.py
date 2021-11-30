@@ -129,7 +129,7 @@ def update(request, pk):
     if not request.user.is_authenticated: return redirect('telaLogin')
     data = {}
     data['moradias'] = Moradia.objects.get(pk=pk)
-    form = MoradiaForm(request.POST or None, instance=data['moradias'])
+    if request.user.id == data['moradias'].dono: form = MoradiaForm(request.POST or None, instance=data['moradias'])
     if form.is_valid():
         form.save()
         return redirect('home')
@@ -140,7 +140,7 @@ def update(request, pk):
 def remover(request, pk):
     if not request.user.is_authenticated: return redirect('telaLogin')
     db = Moradia.objects.get(pk=pk)
-    db.delete()
+    if request.user.id == db.dono: db.delete()
     return redirect('home')
 
 
