@@ -105,7 +105,7 @@ def detalhes(request, pk):
     data['principal'] = Imagem.objects.filter(imovel=pk).order_by('-id')[0]
     print(data['imovel'].dono)
     data['dono'] = User.objects.filter(id=data['imovel'].dono)[0]
-    
+
     imagens = []
     for moradia in data['moradias']:
         try:
@@ -122,6 +122,7 @@ def editar(request, pk):
     data = {}
     data['moradias'] = Moradia.objects.get(pk=pk)
     data['form'] = MoradiaForm(instance=data['moradias'])
+    data['valor'] = str(data['moradias'].valor).replace(",", ".")
     return render(request, 'form.html', data)
 
 
