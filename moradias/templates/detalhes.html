@@ -67,6 +67,15 @@
 							title="Gerenciador de Imagens"
 							><i class="bi bi-image-fill"></i
 						></a>
+						<a
+							href="#"
+							class="btn btn-danger"
+							data-bs-toggle="tooltip"
+							data-bs-placement="top"
+							title="Remover Imóvel"
+							onclick="remover({{imovel.id}})"
+							><i class="bi bi-x-octagon"></i
+						></a>
 						{% endif %}
 					</div>
 				</div>
@@ -96,4 +105,13 @@
 		</div>
 	</div>
 </section>
+<script>
+	function remover(id){
+		var resposta = confirm('Deseja apagar o item?')
+
+		if (resposta){
+			window.location.href = `/remover/${id}`;
+		}
+	}
+</script>
 {% endblock %}
